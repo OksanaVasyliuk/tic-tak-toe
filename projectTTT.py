@@ -26,17 +26,16 @@ def player_move (board, mark):
 
 
 def pc_move (board):
-    board_1 = board
-    position_pc = randrange (0,19)
-    while True: #position_1 < 1 or position_1 > 20:
-        if board_1[position_pc] == "X":
+    position_pc = randrange (1,20)
+    while True:
+        if board[position_pc] == "X":
             position_pc = randrange (1,20)
-        elif board_1[position_pc] == "O":
-            position_pc = randrange (0,19)
-        else:
-            board_1 = board[:position_pc-1]+"O"+board[position_pc:]
+        elif board[position_pc] == "O":
+            position_pc = randrange (1,20)
+        elif board[position_pc] == "-":
+            board = board[:position_pc-1]+"O"+board[position_pc:]
             break
-    return board_1
+    return board
 
 def evaluation ():
     player_winning_comb = "XXX"
@@ -51,5 +50,5 @@ def evaluation ():
         print ("Continue playing")
 
 while True:
-    print (player_move(board, "X"))
-    print (pc_move(board))
+    #print (player_move(board, "X"))
+    print (pc_move(print(player_move(board, "X"))))
