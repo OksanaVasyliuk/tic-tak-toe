@@ -1,6 +1,8 @@
 from random import randrange
 
-print ("Welcome to the game. You have 20 spaces. \nYou are playing with X, computer with O. \nThe one who places three of their own marks next to each other wins.")
+print ("Welcome to the game. You have 20 spaces.")
+print ("You are playing with X, computer with O.")
+print ("The one who places three of their own marks next to each other wins.")
 board = "--------------------"
 question = ("Choose the number 1-20 that corresponds to a space where you want to your mark: ")
 
@@ -20,7 +22,6 @@ def player_move (board):
             board = board_player
             print ("Your move:",board)
             return board
-
 
 def pc_move (board):
     while True:
@@ -48,12 +49,9 @@ def evaluation (board):
     else:
         print ("Continue playing")
 
-
-
 player_winning_comb = "XXX"
 comp_winning_comb = "OOO"
 while True:
-    # print (player_move(board))
     board = player_move(board)
     if player_winning_comb in board:
         print ("You won!", board)
@@ -65,7 +63,6 @@ while True:
         print ("Draw. Maybe one more game?", board)
         break
     
-    # print (pc_move(board))
     board = pc_move(board)
     if player_winning_comb in board:
         print ("You won!")
