@@ -4,40 +4,39 @@ print ("Welcome to the game. You have 20 spaces. \nYou are playing with X, compu
 board = "--------------------"
 question = ("Choose the number 1-20 that corresponds to a space where you want to your mark: ")
 
-def player_move (board, mark):
-    position_1 = int(input(question))
+def player_move (board):
     while True:
+        position_1 = int(input(question))
         if position_1 < 1:
-            print ("Small number. Try again")
-            position_1 = (int(input(question)))     
+            print ("Small number. Try again")     
         elif position_1 > 20:
             print ("Number if too big. Try again")
-            position_1 = (int(input(question)))
         elif board[position_1-1] == "X":
             print ("Slot is taken")
-            position_1 = (int(input(question)))
         elif board[position_1-1] == "O":
             print ("Slot is taken")
-            position_1 = (int(input(question)))
         else:
-            board_move = board[:position_1-1]+mark+board[position_1:]
-            break
-    return board_move
+            board_player=board[:position_1-1]+"X"+board[position_1:]
+            board = board_player
+            print ("Your move:",board)
+            return board
 
 
 def pc_move (board):
-    position_pc = randrange (1,20)
     while True:
+        position_pc = randrange (1,21)
         if board[position_pc] == "X":
-            position_pc = randrange (1,20)
+            position_pc = randrange (1,21)
         elif board[position_pc] == "O":
-            position_pc = randrange (1,20)
+            position_pc = randrange (1,21)
         elif board[position_pc] == "-":
-            board = board[:position_pc-1]+"O"+board[position_pc:]
-            break
-    return board
+            board_pc = board[:position_pc-1]+"O"+board[position_pc:]
+            board = board_pc
+            print ("PC move:",board)
+            return board
 
-def evaluation ():
+
+def evaluation (board):
     player_winning_comb = "XXX"
     comp_winning_comb = "OOO"
     if player_winning_comb in board:
@@ -49,6 +48,32 @@ def evaluation ():
     else:
         print ("Continue playing")
 
+
+
+player_winning_comb = "XXX"
+comp_winning_comb = "OOO"
 while True:
-    #print (player_move(board, "X"))
-    print (pc_move(print(player_move(board, "X"))))
+    # print (player_move(board))
+    board = player_move(board)
+    if player_winning_comb in board:
+        print ("You won!", board)
+        break
+    elif comp_winning_comb in board:
+        print ("Computer won!", board)
+        break
+    elif not "-" in board:
+        print ("Draw. Maybe one more game?", board)
+        break
+    
+    # print (pc_move(board))
+    board = pc_move(board)
+    if player_winning_comb in board:
+        print ("You won!")
+        break
+    elif comp_winning_comb in board:
+        print ("Computer won!")
+        break
+    elif not "-" in board:
+        print ("Draw. Maybe one more game?")
+        break
+
